@@ -18,7 +18,7 @@ using System.Text.RegularExpressions;
 
 namespace FormulaEvaluator
 {
-    public static class Evaluator
+    public static class FormulaEvaluator
     {
         public delegate int Lookup(String variable_name);
         
