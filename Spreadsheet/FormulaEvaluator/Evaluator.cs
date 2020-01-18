@@ -73,9 +73,6 @@ namespace FormulaEvaluator
                             continue;
                         }
                     }
-                   
-
-
                 }
 
                 if (substrings[i].Equals("+")|| substrings[i].Equals("-"))
