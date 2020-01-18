@@ -23,17 +23,17 @@ namespace Test_The_Evaluator_Console_App
         static void Main(string[] args)
         {
 
-            Console.WriteLine(FormulaEvaluator.FormulaEvaluator.Evaluate("5-3", null));//2
-            Console.WriteLine(FormulaEvaluator.FormulaEvaluator.Evaluate("5+5", null));//10
-            Console.WriteLine(FormulaEvaluator.FormulaEvaluator.Evaluate("(2+3)*2", null));//10
-            Console.WriteLine(FormulaEvaluator.FormulaEvaluator.Evaluate("(1+3)*2-(5+5)/5", null));//6
-            Console.WriteLine(FormulaEvaluator.FormulaEvaluator.Evaluate("(1+3)*2-(15-5)/5", null));//6
-            Console.WriteLine(FormulaEvaluator.FormulaEvaluator.Evaluate("3*2", null)) ;//6
-            Console.WriteLine(FormulaEvaluator.FormulaEvaluator.Evaluate("20*30", null));//600
-            Console.WriteLine(FormulaEvaluator.FormulaEvaluator.Evaluate("30/3", null));//10
+            Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("5-3", null));//2
+            Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("5+5", null));//10
+            Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("(2+3)*2", null));//10
+            Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("(1+3)*2-(5+5)/5", null));//6
+            Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("(1+3)*2-(15-5)/5", null));//6
+            Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("3*2", null)) ;//6
+            Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("20*30", null));//600
+            Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("30/3", null));//10
             try
             {
-                Console.WriteLine(FormulaEvaluator.FormulaEvaluator.Evaluate("A3/3", SimpleLookup));//variable does not exist
+                Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("A3/3", SimpleLookup));//variable does not exist
             }
             catch(ArgumentException)
             {
@@ -41,7 +41,7 @@ namespace Test_The_Evaluator_Console_App
             }
             try
             {
-                Console.WriteLine(FormulaEvaluator.FormulaEvaluator.Evaluate("A2/0", SimpleLookup)); //divison by 0
+                Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("A2/0", SimpleLookup)); //divison by 0
             }
             catch (ArgumentException)
             {
@@ -49,15 +49,15 @@ namespace Test_The_Evaluator_Console_App
             }
             try
             {
-                Console.WriteLine(FormulaEvaluator.FormulaEvaluator.Evaluate("-5-", null)); //sytanx error
+                Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("-5-", null)); //sytanx error
             }
             catch (ArgumentException)
             {
                 Console.WriteLine("invalid syntax of the formula");
             }
 
-            Console.WriteLine(FormulaEvaluator.FormulaEvaluator.Evaluate("(A1+3)/3", SimpleLookup));//delegate 4
-            Console.WriteLine(FormulaEvaluator.FormulaEvaluator.Evaluate("(A1-A2)/3", SimpleLookup));//delegate 1
+            Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("(A1+3)/3", SimpleLookup));//delegate 4
+            Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("(A1-A2)/3", SimpleLookup));//delegate 1
             
         }
         public static int SimpleLookup(string v)
