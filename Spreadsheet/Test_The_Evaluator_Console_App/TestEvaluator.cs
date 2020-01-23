@@ -26,7 +26,7 @@ namespace Test_The_Evaluator_Console_App
             Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("5-3", null));//2
             Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("5+5", null));//10
             Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("(2+3)*2", null));//10
-            Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("(1+3)*2-(5+5)/5", null));//6
+            Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("(1+3)*2-(5*5)/5", null));//6
             Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("(1+3)*2-(15-5)/5", null));//6
             Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("3*2", null)) ;//6
             Console.WriteLine(FormulaEvaluator.Evaluator.Evaluate("20*30", null));//600
