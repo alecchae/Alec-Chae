@@ -1,3 +1,17 @@
+/// <summary> 
+/// Author:    [Alec Chae(u1172965)] 
+/// Partner:   [None] 
+/// Date:      [1/24/2020] 
+/// Course:    CS 3500, University of Utah, School of Computing 
+/// Copyright: CS 3500 and [Alec Chae(u1172965)] - This work may not be copied for use in Academic Coursework. 
+/// 
+/// I, [Alec Chae(u1172965)], certify that I wrote this code from scratch and did not copy it in part or whole from  
+/// another source.  All references used in the completion of the assignment are cited in my README file. 
+/// 
+/// File Contents 
+/// 
+///    [Test Depedencygraph] 
+/// </summary>
 using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -259,6 +273,51 @@ namespace DevelopmentTests
                 Assert.IsTrue(dents[i].SetEquals(new HashSet<string>(t.GetDependents(letters[i]))));
                 Assert.IsTrue(dees[i].SetEquals(new HashSet<string>(t.GetDependees(letters[i]))));
             }
+        }
+
+        [TestMethod()]
+        public void HasDependentDependeesTest()
+        {
+            DependencyGraph t = new DependencyGraph();
+            t.AddDependency("a", "b");
+            t.AddDependency("a", "c");
+            t.AddDependency("a", "b");
+            Assert.AreEqual(2, t.Size);
+            Assert.AreEqual(true, t.HasDependents("a"));
+            Assert.AreEqual(false, t.HasDependents("c"));
+            Assert.AreEqual(false, t.HasDependees("a"));
+            Assert.AreEqual(true, t.HasDependees("c"));
+        }
+        [TestMethod()]
+        public void HashSetSizeTest()
+        {
+            DependencyGraph t = new DependencyGraph();
+            t.AddDependency("a", "b");
+            t.AddDependency("a", "c");
+            t.AddDependency("a", "b");
+            Assert.AreEqual(1, t["b"]);
+            
+        }
+
+        [TestMethod()]
+        public void ReplaceDependentTest1()
+        {
+            DependencyGraph t = new DependencyGraph();
+            t.AddDependency("a", "b");
+            t.ReplaceDependents("b", new HashSet<string>() { "c", "d" });
+            Assert.AreEqual(3, t.Size);
+
+        }
+
+        [TestMethod()]
+        public void ReplaceDependeesTest2()
+        {
+            DependencyGraph t = new DependencyGraph();
+            t.AddDependency("a", "b");
+            t.AddDependency("a", "c");
+            t.ReplaceDependees("d", new HashSet<string>() { "e", "d" });
+            Assert.AreEqual(2, t["d"]);
+
         }
 
     }

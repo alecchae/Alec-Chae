@@ -1,8 +1,17 @@
-// Skeleton implementation written by Joe Zachary for CS 3500, September 2013.
-// Version 1.1 (Fixed error in comment for RemoveDependency.)
-// Version 1.2 - Daniel Kopta 
-//               (Clarified meaning of dependent and dependee.)
-//               (Clarified names in solution/project structure.)
+/// <summary> 
+/// Author:    [Alec Chae(u1172965)] 
+/// Partner:   [None] 
+/// Date:      [1/24/2020] 
+/// Course:    CS 3500, University of Utah, School of Computing 
+/// Copyright: CS 3500 and [Alec Chae(u1172965)] - This work may not be copied for use in Academic Coursework. 
+/// 
+/// I, [Alec Chae(u1172965)], certify that I wrote this code from scratch and did not copy it in part or whole from  
+/// another source.  All references used in the completion of the assignment are cited in my README file. 
+/// 
+/// File Contents 
+/// 
+///    [Implementing Depedencygraph] 
+/// </summary>
 
 using System.Collections.Generic;
 
@@ -85,14 +94,12 @@ namespace SpreadsheetUtilities
     /// </summary>
     public bool HasDependents(string s)
     {
-            if (Dependent[s].Count > 0)
+            if (Dependent.ContainsKey(s) && Dependent[s].Count > 0)
             {
                 return true;
             }
             else
-            {
-                return false;
-            }
+            return false;
     }
 
 
@@ -101,7 +108,7 @@ namespace SpreadsheetUtilities
     /// </summary>
     public bool HasDependees(string s)
     {
-            if (Dependees[s].Count > 0)
+            if (Dependees.ContainsKey(s)&& Dependees[s].Count>0)
             {
                 return true;
             }
@@ -117,7 +124,7 @@ namespace SpreadsheetUtilities
     /// </summary>
     public IEnumerable<string> GetDependents(string s)
     {
-            HashSet<string> DependentsSet = new HashSet<string>();
+            HashSet<string> DependentsSet = new HashSet<string>();//creates empty set
             if (Dependent.ContainsKey(s))
             {
                 foreach (string elements in Dependent[s])
@@ -135,7 +142,7 @@ namespace SpreadsheetUtilities
     /// </summary>
     public IEnumerable<string> GetDependees(string s)
     {
-            HashSet<string> DependeesSet = new HashSet<string>();
+            HashSet<string> DependeesSet = new HashSet<string>();//creates empty set
             if (Dependees.ContainsKey(s))
             {
                 foreach (string elements in Dependees[s])
@@ -160,15 +167,20 @@ namespace SpreadsheetUtilities
     /// <param name="t"> t cannot be evaluated until s is</param>        /// 
     public void AddDependency(string s, string t)
     {
-        if(Dependent.ContainsKey(s))
+        if(Dependent.ContainsKey(s)) //if the dictionary dependent contains "s" as a key
         {
+            if(Dependent[s].Count==0) 
+                {
+                    Dependent[s].Add(t);
+                    size++;
+                }
             if(!Dependent[s].Contains(t))
             {
                     Dependent[s].Add(t);
                     size++;
             }
         }
-        if(!Dependent.ContainsKey(s))
+        if(!Dependent.ContainsKey(s))//if the key "s" does not contain in dictionary dependent
         {
                 HashSet<string> DependentSet = new HashSet<string>();
                 DependentSet.Add(t);
@@ -205,19 +217,17 @@ namespace SpreadsheetUtilities
                 if (Dependent[s].Contains(t))
                 {
                     Dependent[s].Remove(t);
-                    size--;
+                    size--;//decrements size
                 }
             }
-           
             if(Dependees.ContainsKey(t))
             {
                 if (Dependees[t].Contains(s))
                 {
                     Dependees[t].Remove(s);
                 }
-            }
-            
-          
+            } 
+   
     }
 
 
@@ -227,37 +237,30 @@ namespace SpreadsheetUtilities
     /// </summary>
     public void ReplaceDependents(string s, IEnumerable<string> newDependents)
     {
-            if (Dependent.ContainsKey(s))
+            if (Dependent.ContainsKey(s))//if the dictionary contains string "s"
             {
                     HashSet<string> DependentSet = new HashSet<string>(Dependent[s]);
-                
-                    foreach (string elements in DependentSet)
+                    foreach (string elements in DependentSet) //removes the old hashset for key "s"
                     {
                         RemoveDependency(s, elements);
                     }
-
-
-                    foreach (string elements in newDependents)
+                    foreach (string elements in newDependents) // adds the old hashset for key "s"
                     {
                         AddDependency(s, elements);
-                    }
-                
+                    } 
             }
-            else
+            else //if it doesn't contain
             {
-                Dependent.Add(s, null);
+                HashSet<string> DependentSet = new HashSet<string>();//creates new hashset
+                Dependent.Add(s, DependentSet); // add's a key and a new hashset
                 foreach (string elements in newDependents)
                 {
-                    AddDependency(s, elements);
-                   
-                    
+                    AddDependency(s, elements); //adds all the elements from newDependents
                 }
-
+                
             }
 
     }
-
-
     /// <summary>
     /// Removes all existing ordered pairs of the form (r,s).  Then, for each 
     /// t in newDependees, adds the ordered pair (t,s).
@@ -274,19 +277,19 @@ namespace SpreadsheetUtilities
                 foreach (string elements in newDependees)
                 {
                     AddDependency(elements, s);
-                    
                 }
             }
             else
             {
-                Dependees.Add(s, null);
+                HashSet<string> DependeesSet = new HashSet<string>();
+                Dependees.Add(s, DependeesSet);
                 foreach (string elements in newDependees)
                 {
                     AddDependency(elements, s);   
                 }
-
+                
             }
-        }
+    }
 
     }
 
