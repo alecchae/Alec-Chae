@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 
+
 namespace SpreadsheetUtilities
 {
 
@@ -51,15 +52,13 @@ namespace SpreadsheetUtilities
         {
         Dependees = new Dictionary<string,HashSet<string>>();
         Dependent = new Dictionary<string, HashSet<string>>();
-             size = 0;
+        size = 0;
         }
 
-
-
-    /// <summary>
-    /// The number of ordered pairs in the DependencyGraph.
-    /// </summary>
-    public int Size
+        /// <summary>
+        /// The number of ordered pairs in the DependencyGraph.
+        /// </summary>
+        public int Size
     {
         get { return size; }
     }
@@ -127,10 +126,8 @@ namespace SpreadsheetUtilities
                 }
                 return DependentsSet;
             }
-            else
-            {
-                throw new KeyNotFoundException();
-            }
+            return DependentsSet;
+            
     }
 
     /// <summary>
@@ -138,20 +135,16 @@ namespace SpreadsheetUtilities
     /// </summary>
     public IEnumerable<string> GetDependees(string s)
     {
+            HashSet<string> DependeesSet = new HashSet<string>();
             if (Dependees.ContainsKey(s))
             {
-                HashSet<string> DependeesSet = new HashSet<string>();
                 foreach (string elements in Dependees[s])
                 {
                     DependeesSet.Add(elements);
                 }
                 return DependeesSet;
             }
-            else
-            {
-                throw new KeyNotFoundException();
-            }
-            
+            return DependeesSet;
         }
 
 
@@ -172,6 +165,7 @@ namespace SpreadsheetUtilities
             if(!Dependent[s].Contains(t))
             {
                     Dependent[s].Add(t);
+                    size++;
             }
         }
         if(!Dependent.ContainsKey(s))
@@ -179,6 +173,7 @@ namespace SpreadsheetUtilities
                 HashSet<string> DependentSet = new HashSet<string>();
                 DependentSet.Add(t);
                 Dependent.Add(s, DependentSet);
+                size++;
         }
 
         if (Dependees.ContainsKey(t))
@@ -191,10 +186,10 @@ namespace SpreadsheetUtilities
         if(!Dependees.ContainsKey(t))
         {
             HashSet<string> DependeesSet = new HashSet<string>();
-            DependeesSet.Add(t);
-            Dependees.Add(s, DependeesSet);
+            DependeesSet.Add(s);
+            Dependees.Add(t, DependeesSet);
         }
-        size++;
+       
     }
 
 
@@ -210,6 +205,7 @@ namespace SpreadsheetUtilities
                 if (Dependent[s].Contains(t))
                 {
                     Dependent[s].Remove(t);
+                    size--;
                 }
             }
            
@@ -218,11 +214,10 @@ namespace SpreadsheetUtilities
                 if (Dependees[t].Contains(s))
                 {
                     Dependees[t].Remove(s);
-                    
                 }
             }
             
-            size--;
+          
     }
 
 
@@ -234,15 +229,28 @@ namespace SpreadsheetUtilities
     {
             if (Dependent.ContainsKey(s))
             {
-                foreach(string elements in Dependent[s])
+                    HashSet<string> DependentSet = new HashSet<string>(Dependent[s]);
+                
+                    foreach (string elements in DependentSet)
+                    {
+                        RemoveDependency(s, elements);
+                    }
+
+
+                    foreach (string elements in newDependents)
+                    {
+                        AddDependency(s, elements);
+                    }
+                
+            }
+            else
+            {
+                Dependent.Add(s, null);
+                foreach (string elements in newDependents)
                 {
-                    Dependent[s].Remove(elements);
-                    Dependees[elements].Remove(s);
-                }
-                foreach(string elements in newDependents)
-                {
-                    Dependent[s].Add(elements);
-                    Dependees[elements].Add(s);
+                    AddDependency(s, elements);
+                   
+                    
                 }
 
             }
@@ -258,18 +266,27 @@ namespace SpreadsheetUtilities
     {
             if (Dependees.ContainsKey(s))
             {
-                foreach (string elements in Dependees[s])
+                HashSet<string> DependeesSet = new HashSet<string>(Dependees[s]);
+                foreach (string elements in DependeesSet)
                 {
-                    Dependees[s].Remove(elements);
-                    Dependent[elements].Remove(s);
+                    RemoveDependency(elements, s);
                 }
                 foreach (string elements in newDependees)
                 {
-                    Dependees[s].Add(elements);
-                    Dependent[elements].Add(s);
+                    AddDependency(elements, s);
+                    
                 }
             }
-    }
+            else
+            {
+                Dependees.Add(s, null);
+                foreach (string elements in newDependees)
+                {
+                    AddDependency(elements, s);   
+                }
+
+            }
+        }
 
     }
 
