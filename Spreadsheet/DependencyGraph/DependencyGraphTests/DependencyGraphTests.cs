@@ -15,7 +15,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SpreadsheetUtilities;
+using DependencyGraph;
 
 
 namespace DevelopmentTests
@@ -34,7 +34,7 @@ namespace DevelopmentTests
         [TestMethod()]
         public void SimpleEmptyTest()
         {
-            DependencyGraph t = new DependencyGraph();
+            DependencyGraph.DependencyGraph t = new DependencyGraph.DependencyGraph();
             Assert.AreEqual(0, t.Size);
         }
 
@@ -45,7 +45,7 @@ namespace DevelopmentTests
         [TestMethod()]
         public void SimpleEmptyRemoveTest()
         {
-            DependencyGraph t = new DependencyGraph();
+            DependencyGraph.DependencyGraph t = new DependencyGraph.DependencyGraph();
             t.AddDependency("x", "y");
             Assert.AreEqual(1, t.Size);
             t.RemoveDependency("x", "y");
@@ -59,7 +59,7 @@ namespace DevelopmentTests
         [TestMethod()]
         public void EmptyEnumeratorTest()
         {
-            DependencyGraph t = new DependencyGraph();
+            DependencyGraph.DependencyGraph t = new DependencyGraph.DependencyGraph();
             t.AddDependency("x", "y");
             IEnumerator<string> e1 = t.GetDependees("y").GetEnumerator();
             Assert.IsTrue(e1.MoveNext());
@@ -79,7 +79,7 @@ namespace DevelopmentTests
         [TestMethod()]
         public void SimpleReplaceTest()
         {
-            DependencyGraph t = new DependencyGraph();
+            DependencyGraph.DependencyGraph t = new DependencyGraph.DependencyGraph();
             t.AddDependency("x", "y");
             Assert.AreEqual(t.Size, 1);
             t.RemoveDependency("x", "y");
@@ -95,8 +95,8 @@ namespace DevelopmentTests
         [TestMethod()]
         public void StaticTest()
         {
-            DependencyGraph t1 = new DependencyGraph();
-            DependencyGraph t2 = new DependencyGraph();
+            DependencyGraph.DependencyGraph t1 = new DependencyGraph.DependencyGraph();
+            DependencyGraph.DependencyGraph t2 = new DependencyGraph.DependencyGraph();
             t1.AddDependency("x", "y");
             Assert.AreEqual(1, t1.Size);
             Assert.AreEqual(0, t2.Size);
@@ -111,7 +111,7 @@ namespace DevelopmentTests
         [TestMethod()]
         public void SizeTest()
         {
-            DependencyGraph t = new DependencyGraph();
+            DependencyGraph.DependencyGraph t = new DependencyGraph.DependencyGraph();
             t.AddDependency("a", "b");
             t.AddDependency("a", "c");
             t.AddDependency("c", "b");
@@ -126,7 +126,7 @@ namespace DevelopmentTests
         [TestMethod()]
         public void EnumeratorTest()
         {
-            DependencyGraph t = new DependencyGraph();
+            DependencyGraph.DependencyGraph t = new DependencyGraph.DependencyGraph();
             t.AddDependency("a", "b");
             t.AddDependency("a", "c");
             t.AddDependency("c", "b");
@@ -163,7 +163,7 @@ namespace DevelopmentTests
         [TestMethod()]
         public void ReplaceThenEnumerate()
         {
-            DependencyGraph t = new DependencyGraph();
+            DependencyGraph.DependencyGraph t = new DependencyGraph.DependencyGraph();
             t.AddDependency("x", "b");
             t.AddDependency("a", "z");
             t.ReplaceDependents("b", new HashSet<string>());
@@ -204,7 +204,7 @@ namespace DevelopmentTests
         public void StressTest()
         {
             // Dependency graph
-            DependencyGraph t = new DependencyGraph();
+            DependencyGraph.DependencyGraph t = new DependencyGraph.DependencyGraph();
 
             // A bunch of strings to use
             const int SIZE = 200;
@@ -278,7 +278,7 @@ namespace DevelopmentTests
         [TestMethod()]
         public void HasDependentDependeesTest()
         {
-            DependencyGraph t = new DependencyGraph();
+            DependencyGraph.DependencyGraph t = new DependencyGraph.DependencyGraph();
             t.AddDependency("a", "b");
             t.AddDependency("a", "c");
             t.AddDependency("a", "b");
@@ -291,7 +291,7 @@ namespace DevelopmentTests
         [TestMethod()]
         public void HashSetSizeTest()
         {
-            DependencyGraph t = new DependencyGraph();
+            DependencyGraph.DependencyGraph t = new DependencyGraph.DependencyGraph();
             t.AddDependency("a", "b");
             t.AddDependency("a", "c");
             t.AddDependency("a", "b");
@@ -302,7 +302,7 @@ namespace DevelopmentTests
         [TestMethod()]
         public void ReplaceDependentTest1()
         {
-            DependencyGraph t = new DependencyGraph();
+            DependencyGraph.DependencyGraph t = new DependencyGraph.DependencyGraph();
             t.AddDependency("a", "b");
             t.ReplaceDependents("b", new HashSet<string>() { "c", "d" });
             Assert.AreEqual(3, t.Size);
@@ -312,7 +312,7 @@ namespace DevelopmentTests
         [TestMethod()]
         public void ReplaceDependeesTest2()
         {
-            DependencyGraph t = new DependencyGraph();
+            DependencyGraph.DependencyGraph t = new DependencyGraph.DependencyGraph();
             t.AddDependency("a", "b");
             t.AddDependency("a", "c");
             t.ReplaceDependees("d", new HashSet<string>() { "e", "d" });

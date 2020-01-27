@@ -16,7 +16,7 @@
 using System.Collections.Generic;
 
 
-namespace SpreadsheetUtilities
+namespace DependencyGraph
 {
 
     /// <summary>
