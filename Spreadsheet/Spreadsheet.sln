@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormulaEvaluator", "Formula
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test_The_Evaluator_Console_App", "Test_The_Evaluator_Console_App\Test_The_Evaluator_Console_App.csproj", "{FBFF94AE-1833-42FB-90C1-334BA6D8FB93}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyGraphTests", "DependencyGraphTests\DependencyGraphTests.csproj", "{19AFE1AA-DDF4-4F06-BE78-1B72D0C25C54}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyGraph", "DependencyGraph\DependencyGraph.csproj", "{2327CBBA-46B3-44FC-A8B7-BC51A6172727}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{FBFF94AE-1833-42FB-90C1-334BA6D8FB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBFF94AE-1833-42FB-90C1-334BA6D8FB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBFF94AE-1833-42FB-90C1-334BA6D8FB93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19AFE1AA-DDF4-4F06-BE78-1B72D0C25C54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19AFE1AA-DDF4-4F06-BE78-1B72D0C25C54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19AFE1AA-DDF4-4F06-BE78-1B72D0C25C54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19AFE1AA-DDF4-4F06-BE78-1B72D0C25C54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2327CBBA-46B3-44FC-A8B7-BC51A6172727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2327CBBA-46B3-44FC-A8B7-BC51A6172727}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2327CBBA-46B3-44FC-A8B7-BC51A6172727}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2327CBBA-46B3-44FC-A8B7-BC51A6172727}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
