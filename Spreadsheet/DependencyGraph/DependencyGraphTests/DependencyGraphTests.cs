@@ -18,7 +18,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DependencyGraph;
 
 
-namespace DevelopmentTests
+namespace DependencyGraphTest
 {
     /// <summary>
     ///This is a test class for DependencyGraphTest and is intended
